@@ -53,6 +53,8 @@ jQuery(function ($) {
     copy({ mode: "current_window_only" });
   });
   $("#actionPaste").on("click", function () {
+    chrome.permissions.request({ permissions: ["clipboardRead"] });
+
     bkg.Action.paste();
   });
   $("#actionOption").click(function () {
