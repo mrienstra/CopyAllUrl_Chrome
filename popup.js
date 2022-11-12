@@ -85,7 +85,7 @@ jQuery(function ($) {
   // Affichage notification nouvelle version dans la page d'option
   if (bkg.UpdateManager.recentUpdate()) {
     var content =
-      'New version recently installed. Check the <a href="http://finalclap.github.io/CopyAllUrl_Chrome/">changelog</a>.';
+      'New version recently installed. Check the <a href="https://github.com/vincepare/CopyAllUrl_Chrome">changelog</a>.';
     $("#recently-updated")
       .html(content)
       .show()

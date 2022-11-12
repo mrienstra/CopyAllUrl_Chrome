@@ -111,7 +111,7 @@ jQuery(document).ready(function ($) {
       chrome.runtime.getManifest().version +
       "</h3>" +
       "Check the " +
-      '<a href="http://finalclap.github.io/CopyAllUrl_Chrome/">' +
+      '<a href="https://github.com/vincepare/CopyAllUrl_Chrome">' +
       "changelog</a> to see what's new !<br>" +
       "<em>This notice will go off automatically</em>";
     $("#recently-updated").html(content).show();

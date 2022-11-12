@@ -345,7 +345,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
   chrome.notifications.onClicked.addListener(function (notificationId) {
     if (notificationId == "cpau_update_notification") {
       chrome.tabs.create({
-        url: "http://finalclap.github.io/CopyAllUrl_Chrome/",
+        url: "https://github.com/vincepare/CopyAllUrl_Chrome",
       });
     }
   });
