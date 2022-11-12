@@ -1,3 +1,22 @@
+const MODES = {
+  highlighted_tab_only: {
+    highlighted_tab_only: true,
+    walk_all_windows: false,
+  },
+  walk_all_windows: {
+    highlighted_tab_only: false,
+    walk_all_windows: true,
+  },
+  current_window_only: {
+    highlighted_tab_only: false,
+    walk_all_windows: false,
+  },
+};
+
+function localStorageIsTrue(key) {
+  return localStorage[key] === "true";
+}
+
 /**
  * Gére l'accès au presse papier
  * (on est obligé de passer par la background page pour y accéder, cf: http://stackoverflow.com/questions/6925073/copy-paste-not-working-in-chrome-extension)
@@ -55,28 +74,34 @@ Action = {
   /**
    * Copie les URLs de la fenêtre passé en paramètre dans le presse papier
    * @param opt.window  : fenêtre dont on copie les URL
+   * @param opt.mode  : Override options, force mode
    */
   copy: function (opt) {
+    const mode = (opt.mode && MODES[opt.mode]) || {};
+
+    // Récupération configuration
+    let extended_mime = localStorage["mime"] === "html";
+    const format = localStorage["format"] || "text";
+    const highlighted_tab_only =
+      mode.highlighted_tab_only !== undefined
+        ? mode.highlighted_tab_only
+        : localStorageIsTrue("highlighted_tab_only");
+    const walk_all_windows =
+      mode.walk_all_windows !== undefined
+        ? mode.walk_all_windows
+        : localStorageIsTrue("walk_all_windows");
+
     // Par défaut, on récupère tous les onglets de la fenêtre opt.window
     var tabQuery = { windowId: opt.window.id };
 
     // Si "Copy tabs from all windows" est coché, suppression du filtre sur fenêtre courante
     try {
-      if (localStorage["walk_all_windows"] == "true") {
+      if (walk_all_windows) {
         tabQuery.windowId = null;
       }
     } catch (ex) {}
 
     chrome.tabs.query(tabQuery, function (tabs) {
-      // Récupération configuration
-      var format = localStorage["format"] ? localStorage["format"] : "text";
-      var highlighted_tab_only =
-        localStorage["highlighted_tab_only"] == "true" ? true : false;
-      var extended_mime =
-        typeof localStorage["mime"] != "undefined" &&
-        localStorage["mime"] == "html"
-          ? true
-          : false;
       var outputText = "";
 
       // Filtrage des onglets

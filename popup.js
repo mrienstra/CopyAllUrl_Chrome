@@ -5,15 +5,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (typeof request.type != "string") return;
   switch (request.type) {
     case "copy":
-      var nombre = request.copied_url > 1 ? "s" : "";
+      var count = request.copied_url > 1 ? "s" : "";
       jQuery("#message")
         .removeClass("error")
         .html(
           "<b>" +
             request.copied_url +
             "</b> url" +
-            nombre +
-            " successfully copied !"
+            count +
+            " successfully copied!"
         );
       setTimeout(function () {
         window.close();
@@ -33,20 +33,32 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 /**
  * Gestion des boutons de la popup
  */
-jQuery(function ($) {
-  $("#actionCopy").on("click", function (e, fromDefaultAction) {
-    // On récupére la fenêtre courante
-    chrome.windows.getCurrent(function (win) {
-      bkg.Action.copy({ window: win });
-    });
+function copy(opt) {
+  // On récupére la fenêtre courante
+  chrome.windows.getCurrent(function (win) {
+    bkg.Action.copy({ window: win, ...opt });
   });
-  $("#actionPaste").on("click", function (e, fromDefaultAction) {
+}
+jQuery(function ($) {
+  $("#actionCopy").on("click", function () {
+    copy();
+  });
+  $("#actionCopyHighlighted").on("click", function () {
+    copy({ mode: "highlighted_tab_only" });
+  });
+  $("#actionCopyAll").on("click", function () {
+    copy({ mode: "walk_all_windows" });
+  });
+  $("#actionCopyCurrent").on("click", function () {
+    copy({ mode: "current_window_only" });
+  });
+  $("#actionPaste").on("click", function () {
     bkg.Action.paste();
   });
-  $("#actionOption").click(function (e) {
+  $("#actionOption").click(function () {
     chrome.tabs.create({ url: "options.html" });
   });
-  $("#contribute a").click(function (e) {
+  $("#contribute a").click(function () {
     chrome.tabs.create({ url: "options.html#donate" });
   });
 

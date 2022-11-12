@@ -41,6 +41,6 @@
 		"notifications"
 	],
 	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
-	"version": "2.10",
+	"version": "2.11",
 	"manifest_version": 2
 }
