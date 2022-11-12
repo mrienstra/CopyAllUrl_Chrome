@@ -10,7 +10,7 @@
 	},
 	"background": {
 		"scripts": [
-			"vendor/jquery-1.7.2_min.js",
+			"vendor/jquery-3.6.1.slim.min.js",
 			"vendor/encoder.js",
 			"background.js"
 		]
