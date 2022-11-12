@@ -9,7 +9,11 @@
 		"128": "img/umbrella_128.png"
 	},
 	"background": {
-		"scripts": ["vendor/jquery-1.7.2_min.js", "vendor/encoder.js", "background.js"]
+		"scripts": [
+			"vendor/jquery-1.7.2_min.js",
+			"vendor/encoder.js",
+			"background.js"
+		]
 	},
 	"commands": {
 		"copy": {
@@ -27,7 +31,15 @@
 	},
 	"name": "Copy All Urls",
 	"options_page": "options.html",
-	"permissions": ["tabs", "http://*/*", "https://*/*", "management", "clipboardRead", "clipboardWrite", "notifications"],
+	"permissions": [
+		"tabs",
+		"http://*/*",
+		"https://*/*",
+		"management",
+		"clipboardRead",
+		"clipboardWrite",
+		"notifications"
+	],
 	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 	"version": "2.10",
 	"manifest_version": 2

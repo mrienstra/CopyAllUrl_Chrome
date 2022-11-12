@@ -1,5 +1,4 @@
-Copy All URL for Google Chrome
-==============================
+# Copy All URL for Google Chrome
 
 CopyAllURL is Google Chrome extension to copy all openned tabs URL to clipboard, and to open multiple URL in the clipboard (paste).
 
